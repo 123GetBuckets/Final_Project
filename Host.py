@@ -1,10 +1,39 @@
 import socket 
 import threading
 import time
-address = ('10.109.88.158', 444)
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(address)
 
-sock.listen(10)
-client, addr = sock.accept()
-print(f'{client} has connected')
+class host:
+    def __init__(self, s_name, HOST, PORT):
+        self.name = s_name
+        self.HOST = HOST
+        self.PORT = PORT
+
+    def start(self):
+        print(f'[SERVER START]')
+        time.sleep(1)
+        print(f'--------------')
+        time.sleep(3)
+        print(f'[SERVER RUNNING]')
+        self.name = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        addr = (self.HOST, self.PORT)
+        self.name.bind(addr)
+        
+        self.name.listen()
+        while True:
+            conn, c_addr = self.name.accept()
+            thread = threading.Thread(target = c_handle, args = (conn, c_addr))
+            thread.start()
+
+    def c_handle(self, conn, c_addr):
+        print(f'[CONNECTED]:{c_addr}')
+
+
+
+
+
+        
+server = host("sock", '10.109.88.158', 444)
+server.start()
+
+
+        

@@ -13,7 +13,7 @@ class host:
         print(f'[CONNECTED]:{c_addr}')
         while True:
             msg = conn.recv(1024)
-            print(f'{c_addr}: {str(msg)}')
+            print(f'{c_addr}: {str(msg, encoding="utf-8")}')
 
     def start(self):
         print(f'[SERVER START]')

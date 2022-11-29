@@ -40,7 +40,7 @@ class host:
         while True:
             conn, c_addr = self.name.accept()
             with self.active_lock:
-                self.active.add(conn)
+                self.active.add(c_addr)
             thread = threading.Thread(target=self.c_handle, args=(conn, c_addr))
             thread.start()
 

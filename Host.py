@@ -21,7 +21,7 @@ class host:
                     break
                 with self.active_lock:
                     for i in self.active:
-                        conn.sendall(f'{c_addr}: {str(msg, encoding="utf-8")}')
+                        conn.sendall(bytes(f'{c_addr}:{msg}'))
         finally:
             with self.active_lock:
                 self.active.remove(conn)

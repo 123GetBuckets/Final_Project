@@ -9,7 +9,7 @@ class host:
         self.HOST = HOST
         self.PORT = PORT
         self.active = set()
-        self.active_lock = threading.lock()
+        self.active_lock = threading.Lock()
 
     def c_handle(self, conn, c_addr):
         print(f'[CONNECTED]:{c_addr}')

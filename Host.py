@@ -11,7 +11,7 @@ class host:
 
     def c_handle(self, conn, c_addr):
         print(f'[CONNECTED]:{c_addr}')
-        while True:
+        try:
             msg = conn.recv(1024)
             print(f'{c_addr}: {str(msg, encoding="utf-8")}')
 

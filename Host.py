@@ -1,6 +1,7 @@
-import socket 
+import socket
 import threading
 import time
+
 
 class host:
     def __init__(self, s_name, HOST, PORT):
@@ -10,6 +11,9 @@ class host:
 
     def c_handle(self, conn, c_addr):
         print(f'[CONNECTED]:{c_addr}')
+        while True:
+            msg = conn.recv(1024)
+            print(f'{c_addr}: {str(msg)}')
 
     def start(self):
         print(f'[SERVER START]')
@@ -23,18 +27,9 @@ class host:
         self.name.listen()
         while True:
             conn, c_addr = self.name.accept()
-            thread = threading.Thread(target=self.c_handle, args = (conn, c_addr))
+            thread = threading.Thread(target=self.c_handle, args=(conn, c_addr))
             thread.start()
 
-    
 
-
-
-
-
-        
-server = host("sock", '10.109.95.251', 444)
+server = host("sock", '10.109.83.27', 444)
 server.start()
-
-
-        

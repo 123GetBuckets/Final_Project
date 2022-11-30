@@ -17,7 +17,7 @@ def sending():
 def rec():
     while True:
         msg = user.recv(1024)
-        print(str(msg, encoding="utf-8")')
+        print(str(msg, encoding="utf-8"))
 
 
 def start():

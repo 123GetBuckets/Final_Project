@@ -18,9 +18,8 @@ class host:
                 print(f'{c_addr}: {str(msg, encoding="utf-8")}')
                 if not msg:
                     break
-                print(len(self.active))
                 for i in self.active:
-                    i.send(bytes(f'\n{c_addr}:{msg}', encoding='ascii'))
+                    i.send(bytes(f'\n{c_addr}:{msg}, {encoding}=ascii'))
         finally:
             self.active.pop(conn)
         conn.close()

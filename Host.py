@@ -9,6 +9,7 @@ class host:
         self.HOST = HOST
         self.PORT = PORT
         self.active = []
+
     def c_handle(self, conn, c_addr):
         print(f'[CONNECTED]:{c_addr}')
         try:
@@ -19,7 +20,8 @@ class host:
                     break
                 print(len(self.active))
                 for i in self.active:
-                    i.send(bytes(f'{c_addr}:{msg}', encoding='ascii'))
+                    y = (bytes(f'{c_addr}:{msg}', encoding='ascii'))
+                    i.send(str(f'\n{y}', encoding='utf-8'))
         finally:
             self.active.pop(conn)
         conn.close()
@@ -36,11 +38,10 @@ class host:
         self.name.listen()
 
         while True:
-            conn, c_addr = self.name.accept() 
+            conn, c_addr = self.name.accept()
             self.active.append(conn)
             thread = threading.Thread(target=self.c_handle, args=(conn, c_addr))
             thread.start()
-            
 
 
 server = host("sock", '10.109.89.148', 444)

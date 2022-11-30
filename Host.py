@@ -19,7 +19,7 @@ class host:
                 if not msg:
                     break
                 for i in self.active:
-                    i.send(bytes('\n',c_addr,':',msg, encoding='ascii'))
+                    i.send(bytes(str('\n',c_addr,':',msg, encoding='ascii')))
         finally:
             self.active.pop(conn)
         conn.close()

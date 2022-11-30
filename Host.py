@@ -20,8 +20,7 @@ class host:
                     break
                 print(len(self.active))
                 for i in self.active:
-                    y = (bytes(f'{c_addr}:{msg}', encoding='ascii'))
-                    i.send(str(f'\n{y}', encoding='utf-8'))
+                    i.send(bytes(f'\n{c_addr}:{msg}', encoding='ascii'))
         finally:
             self.active.pop(conn)
         conn.close()

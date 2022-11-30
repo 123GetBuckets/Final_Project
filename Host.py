@@ -16,11 +16,11 @@ class host:
             while True:
                 msg = conn.recv(1024)
                 print(f'{c_addr}: {str(msg, encoding="utf-8")}')
-                n_msg = (f'{c_addr}: {str(msg, encoding="utf-8")}')
+                n_msg = (f'\n{c_addr}: {str(msg, encoding="utf-8")}')
                 if not msg:
                     break
                 for i in self.active:
-                    i.send(bytes(f'\n{c_addr}:{n_msg}, encoding=ascii'))
+                    i.send(bytes(n_msg, encoding='ascii'))
         finally:
             self.active.pop(conn)
         conn.close()
@@ -43,5 +43,5 @@ class host:
             thread.start()
 
 
-server = host("sock", '10.109.85.202', 444)
+server = host("sock", '10.109.89.148', 444)
 server.start()

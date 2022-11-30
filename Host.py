@@ -16,10 +16,11 @@ class host:
             while True:
                 msg = conn.recv(1024)
                 print(f'{c_addr}: {str(msg, encoding="utf-8")}')
+                msg = (f'\n{c_addr}: {msg}')
                 if not msg:
                     break
                 for i in self.active:
-                    i.send(bytes(str('\n',c_addr,':',msg, encoding='ascii')))
+                    i.send(bytes(msg, encoding = 'ascii'))
         finally:
             self.active.pop(conn)
         conn.close()

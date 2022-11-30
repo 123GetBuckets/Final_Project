@@ -8,7 +8,7 @@ class host:
         self.name = s_name
         self.HOST = HOST
         self.PORT = PORT
-        self.active = []
+        self.active = set()
 
     def c_handle(self, conn, c_addr):
         print(f'[CONNECTED]:{c_addr}')
@@ -22,7 +22,7 @@ class host:
                 for i in self.active:
                     i.send(bytes(n_msg, encoding='ascii'))
         finally:
-            self.active.pop(conn)
+            self.active.remove(conn)
         conn.close()
 
     def start(self):
@@ -38,7 +38,7 @@ class host:
 
         while True:
             conn, c_addr = self.name.accept()
-            self.active.append(conn)
+            self.active.add(conn)
             thread = threading.Thread(target=self.c_handle, args=(conn, c_addr))
             thread.start()
 

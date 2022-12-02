@@ -20,6 +20,8 @@ def rec():
     while True:
         try:    
             msg = user.recv(1024)
+            if len(msg) == 0:
+                return
             print(f'{str(msg, encoding="utf-8")}')
         except:
             print("RECIEVE ERROR")

@@ -35,7 +35,7 @@ class host:
                 with self.active_lock:
                     for i in self.active:
                         i.send(bytes(n_msg, encoding='ascii'))
-            finally:
+            except:
                 with self.active_lock:
                     self.active.remove(conn)
                     conn.close()

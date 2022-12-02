@@ -4,13 +4,9 @@ user = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 def sending():
     while True:
         try:
-            msglen = True
-            while msglen == True:
-                msg = input()
-                if len(msg) > 0:
-                    pass
-                else:
-                    msglen = False
+            msg = input()
+            if len(msg) == 0:
+                msg = "I'm stupid and can't type anything of value."
             if msg.lower() == "terminate":
                 user.close()
                 return False

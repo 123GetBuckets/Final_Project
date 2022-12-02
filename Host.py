@@ -16,6 +16,7 @@ class host:
             try:
                 password = conn.recv(1024)
                 if str(password, encoding="utf-8") == "JollyGoodShow":
+                    conn.send(bytes(f'Welcome! Type [$help] for commands', encoding='ascii'))
                     break
                 else:
                     conn.send(bytes('INCORRECT PASSWORD GET OUT', encoding='ascii'))
@@ -30,11 +31,21 @@ class host:
                 msg = conn.recv(1024)
                 print(f'{c_addr}: {str(msg, encoding="utf-8")}')
                 n_msg = (f'\n{c_addr}: {str(msg, encoding="utf-8")}')
-                if not msg:
+                if str(msg, encoding='utf-8') == '$help':
+                    conn.send(bytes(f'[$name]: Name Change Prompt\n Type [terminate] (not case sensitive) to disconnect.\n', encoding="ascii"))
+                    msg = conn.recv(1024)
+                    n_msg = (f'\n{c_addr}: {str(msg, encoding="utf-8")}')
+                elif str(msg, encoding='utf-8') == '$name':
+                    name = str(conn.recv(1024),encoding='utf-8')
+                    c_addr = name
+                    msg = conn.recv(1024)
+                    n_msg = (f'\n{c_addr}: {str(msg, encoding="utf-8")}')
+                elif not msg:
                     break
                 with self.active_lock:
                     for i in self.active:
-                        i.send(bytes(n_msg, encoding='ascii'))
+                        if conn != i:
+                            i.send(bytes(n_msg, encoding='ascii'))
             except:
                 with self.active_lock:
                     self.active.remove(conn)

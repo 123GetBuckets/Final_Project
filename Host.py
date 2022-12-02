@@ -10,10 +10,23 @@ class host:
         self.PORT = PORT
         self.active = set()
         self.active_lock = threading.Lock()
+
     def c_handle(self, conn, c_addr):
+        while True:
+            try:
+                password = conn.recv(1024)
+                if str(password, encoding="utf-8") == "JollyGoodShow":
+                    break
+                else:
+                    conn.send(bytes('INCORRECT PASSWORD GET OUT', encoding='ascii'))
+                    time.sleep(1)
+                    conn.close()
+                    return
+            except:
+                pass
         print(f'[CONNECTED]:{c_addr}')
-        try:
-            while True:
+        while True:
+            try:
                 msg = conn.recv(1024)
                 print(f'{c_addr}: {str(msg, encoding="utf-8")}')
                 n_msg = (f'\n{c_addr}: {str(msg, encoding="utf-8")}')
@@ -22,11 +35,13 @@ class host:
                 with self.active_lock:
                     for i in self.active:
                         i.send(bytes(n_msg, encoding='ascii'))
-        finally:
-            with self.active_lock:
-                self.active.remove(conn)
-        conn.close()
-
+            finally:
+                with self.active_lock:
+                    self.active.remove(conn)
+                    conn.close()
+                    for i in self.active:
+                        i.send(bytes(f'{c_addr} HAS DISCONNECT', encoding='ascii'))
+                    return
     def start(self):
         print(f'[SERVER START]')
         time.sleep(1)
@@ -46,5 +61,5 @@ class host:
             thread.start()
 
 
-server = host("sock", '10.109.81.174', 444)
+server = host("sock", '10.109.82.246', 444)
 server.start()

@@ -7,10 +7,8 @@ def sending():
             msg = input()
             if len(msg) == 0:
                 msg = "I'm stupid and can't type anything of value."
-            if msg.lower() == "terminate":
+            elif msg.lower() == "terminate":
                 user.close()
-                return False
-            if not msg:
                 return False
             user.send(bytes(msg, encoding='ascii'))
         except:

@@ -28,19 +28,16 @@ class host:
         print(f'[CONNECTED]:{c_addr}')
         while True:
             try:
-                msg = conn.recv(1024)
+                msg = conn.recv(4048)
                 print(f'{c_addr}: {str(msg, encoding="utf-8")}')
                 n_msg = (f'\n{c_addr}: {str(msg, encoding="utf-8")}')
                 if str(msg, encoding='utf-8') == '$help':
                     conn.send(bytes(f'[$name]: Name Change Prompt\n Type [terminate] (not case sensitive) to disconnect.\n', encoding="ascii"))
-                    msg = conn.recv(1024)
-                    n_msg = (f'\n{c_addr}: {str(msg, encoding="utf-8")}')
+                    continue
                 elif str(msg, encoding='utf-8') == '$name':
                     name = conn.recv(1024)
                     c_addr = str(name, encoding='utf-8')
-                    print(c_addr)
-                    msg = conn.recv(1024)
-                    n_msg = (f'\n{c_addr}: {str(msg, encoding="utf-8")}')
+                    continue
                 elif not msg:
                     break
                 with self.active_lock:

@@ -5,7 +5,7 @@ def sending():
     while True:
         try:
             while True:
-                msg = input()
+                msg = input("[USER]:")
                 if len(msg) == 0:
                     pass
                 else:

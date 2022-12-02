@@ -36,8 +36,9 @@ class host:
                     msg = conn.recv(1024)
                     n_msg = (f'\n{c_addr}: {str(msg, encoding="utf-8")}')
                 elif str(msg, encoding='utf-8') == '$name':
-                    name = str(conn.recv(1024),encoding='utf-8')
-                    c_addr = name
+                    name = conn.recv(1024)
+                    c_addr = str(name, encoding='utf-8')
+                    print(c_addr)
                     msg = conn.recv(1024)
                     n_msg = (f'\n{c_addr}: {str(msg, encoding="utf-8")}')
                 elif not msg:

@@ -14,7 +14,7 @@ class host:
     def c_handle(self, conn, c_addr):
         while True:
             try:
-                password = conn.recv(1024)
+                password = conn.recv(512)
                 if str(password, encoding="utf-8") == "JollyGoodShow":
                     conn.send(bytes(f'Welcome! Type [$help] for commands', encoding='ascii'))
                     break

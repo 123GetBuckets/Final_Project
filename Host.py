@@ -38,9 +38,10 @@ class host:
             except:
                 with self.active_lock:
                     self.active.remove(conn)
+                    print(f'{c_addr} HAS DISCONNECTED')
                     conn.close()
                     for i in self.active:
-                        i.send(bytes(f'{c_addr} HAS DISCONNECT', encoding='ascii'))
+                        i.send(bytes(f'{c_addr} HAS DISCONNECTED', encoding='ascii'))
                     return
     def start(self):
         print(f'[SERVER START]')

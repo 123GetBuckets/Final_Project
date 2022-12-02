@@ -6,7 +6,7 @@ def sending():
         try:
             while True:
                 msg = input()
-                if len(msg) == 0:
+                if len(msg) > 2:
                     pass
                 else:
                     break

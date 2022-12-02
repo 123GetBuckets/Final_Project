@@ -4,12 +4,13 @@ user = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 def sending():
     while True:
         try:
-            while True:
+            msglen =True
+            while msglen:
                 msg = input()
                 if len(msg) > 2:
                     pass
                 else:
-                    break
+                    msglen = False
             if msg.lower() == "terminate":
                 user.close()
                 return False

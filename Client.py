@@ -4,8 +4,8 @@ user = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 def sending():
     while True:
         try:
-            msglen =True
-            while msglen:
+            msglen = True
+            while msglen == True:
                 msg = input()
                 if len(msg) > 0:
                     pass

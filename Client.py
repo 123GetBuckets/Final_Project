@@ -7,7 +7,7 @@ def sending():
             msglen =True
             while msglen:
                 msg = input()
-                if len(msg) > 2:
+                if len(msg) > 0:
                     pass
                 else:
                     msglen = False

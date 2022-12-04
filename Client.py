@@ -1,6 +1,12 @@
 import socket
 import threading
+import asyncio
+import INTERFACE as tk
 user = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+gooey = tk.INTERFACE()
+
+
 def sending():
     while True:
         try:
@@ -18,10 +24,11 @@ def sending():
             print("SEND ERROR")
             user.close()
             return False
-    
+
+
 def rec():
     while True:
-        try:    
+        try:
             msg = user.recv(1024)
             if len(msg) == 0:
                 return
@@ -31,16 +38,19 @@ def rec():
             user.close()
             return False
 
+
 def start(IP, PORT):
     addr = (IP, PORT)
     try:
         user.connect(addr)
     except:
         print("Unable to reach HOST")
-        return 
+        return
     thread = threading.Thread(target=rec)
     thread2 = threading.Thread(target=sending)
     thread.start()
     thread2.start()
     return
-start('10.109.82.246', 444)
+
+
+start('10.109.82.235', 444)

@@ -2,6 +2,7 @@ import tkinter as tk
 
 # from PIL import ImageTk
 
+bye = 'hello'
 
 root = tk.Tk()
 root.title("CHAT BUCKET")

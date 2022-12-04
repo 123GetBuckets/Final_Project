@@ -1,12 +1,12 @@
 import socket
 import threading
 import asyncio
-import INTERFACE as tk
+import INTERFACE
 user = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-gooey = tk.INTERFACE()
+INTERFACE.creation("rectangle")
 
-
+# we need to make it so, if you 
 def sending():
     while True:
         try:
@@ -14,8 +14,11 @@ def sending():
                 msg = input()
                 if len(msg) == 0:
                     pass
+                if chat_box) != 0:
+
                 else:
                     break
+
             if msg.lower() == "terminate":
                 user.close()
                 return False

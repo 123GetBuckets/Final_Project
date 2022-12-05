@@ -25,10 +25,11 @@ class client:
 
     def creation(self):
         self.top_page = tk.Label(self.root, bg=self.b_blue, fg="black",
-                                 text="Welcome to Chat Bucket!", pady=1, padx=1, height=1).grid(row=0)
+                                 text="Welcome to Chat Bucket!",
+                                 pady=1, padx=1, height=1).grid(row=0)
         self.root.title("CHAT BUCKET")
         self.root.eval('tk::PlaceWindow . center')
-        self.root.resizable(width=tk.FALSE, height=tk.FALSE)
+        self.root.resizable(width=tk.TRUE, height=tk.TRUE)
         self.send.grid(row=2, column=1)
         self.root.bind('<Return>', lambda event: self.sender())
         self.rectangle.config(state=tk.DISABLED)
@@ -83,34 +84,34 @@ class client:
         pygame.mixer.music.play(loops=0)
 
 
-'''
-    def logo():
-        # image1 = Image.open("bucket.png")
-        # test = ImageTk.PhotoImage(image1)
-        # label1 = tk.Label(image=test)
-        label1.image = test
-        label1.place(x=50, y=50)
-        root.mainloop()
-'''
+    '''
+        def logo():
+            # image1 = Image.open("bucket.png")
+            # test = ImageTk.PhotoImage(image1)
+            # label1 = tk.Label(image=test)
+            label1.image = test
+            label1.place(x=50, y=50)
+            root.mainloop()
+    '''
 
 
-def start(self, IP, PORT):
-    self.creation()
-    time.sleep(5)
-    addr = (IP, PORT)
-    try:
-        self.user.connect(addr)
-    except:
-        print("Unable to reach HOST")
-        return
-    self.thread = threading.Thread(target=self.Nrec)
-    self.thread2 = threading.Thread(target=self.Nsending)
-    self.thread.start()
-    self.thread2.start()
-    self.creation()
+    def start(self, IP, PORT):
+        self.creation()
+        time.sleep(5)
+        addr = (IP, PORT)
+        try:
+            self.user.connect(addr)
+        except:
+            print("Unable to reach HOST")
+            return
+        self.thread = threading.Thread(target=self.Nrec)
+        self.thread2 = threading.Thread(target=self.Nsending)
+        self.thread.start()
+        self.thread2.start()
+        self.creation()
 
 
 gui = client()
-gui.start('10.109.82.235', 444)
+gui.start('10.109.97.251', 444)
 
 gui.root.mainloop()

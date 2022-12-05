@@ -1,6 +1,7 @@
 import tkinter as tk
 import socket
 import threading
+import time
 
 
 '''
@@ -130,6 +131,7 @@ class client:
 
     def start(self, IP, PORT):
         self.creation()
+        time.sleep(10)
         addr = (IP, PORT)
         try:
             self.user.connect(addr)

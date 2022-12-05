@@ -14,7 +14,7 @@ class host:
     def c_handle(self, conn, c_addr):
         while True:
             try:
-                password = conn.recv(512)
+                password = conn.recv(1024)
                 if str(password, encoding="utf-8") == "JollyGoodShow":
                     conn.send(bytes(f'Welcome! Type [$help] for commands', encoding='ascii'))
                     break
@@ -28,11 +28,12 @@ class host:
         print(f'[CONNECTED]:{c_addr}')
         while True:
             try:
-                msg = conn.recv(4048)
+                msg = conn.recv(1024)
                 print(f'{c_addr}: {str(msg, encoding="utf-8")}')
                 n_msg = (f'\n{c_addr}: {str(msg, encoding="utf-8")}')
                 if str(msg, encoding='utf-8') == '$help':
-                    conn.send(bytes(f'[$name]: Name Change Prompt\n Type [terminate] (not case sensitive) to disconnect.\n', encoding="ascii"))
+                    conn.send(bytes(
+                        f'[$name]: Name Change Prompt\n Type [terminate] (not case sensitive) to disconnect.\n', encoding="ascii"))
                     continue
                 elif str(msg, encoding='utf-8') == '$name':
                     name = conn.recv(1024)
@@ -52,6 +53,7 @@ class host:
                     for i in self.active:
                         i.send(bytes(f'{c_addr} HAS DISCONNECTED', encoding='ascii'))
                     return
+
     def start(self):
         print(f'[SERVER START]')
         time.sleep(1)
@@ -71,5 +73,5 @@ class host:
             thread.start()
 
 
-server = host("sock", '10.109.82.33', 444)
+server = host("sock", '10.109.82.235', 444)
 server.start()

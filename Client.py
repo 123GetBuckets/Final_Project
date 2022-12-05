@@ -1,12 +1,8 @@
 import socket
 import threading
-import asyncio
-import INTERFACE
 user = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-INTERFACE.creation("rectangle")
 
-# we need to make it so, if you 
 def sending():
     while True:
         try:
@@ -14,8 +10,6 @@ def sending():
                 msg = input()
                 if len(msg) == 0:
                     pass
-                if chat_box) != 0:
-
                 else:
                     break
 

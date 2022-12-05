@@ -2,8 +2,6 @@ import tkinter as tk
 
 # from PIL import ImageTk
 
-bye = 'hello'
-
 root = tk.Tk()
 root.title("CHAT BUCKET")
 root.eval('tk::PlaceWindow . center')
@@ -23,23 +21,20 @@ def creation():
                         text="Welcome to Chat Bucket!",
                         pady=1, padx=1, height=1).grid(row=0)  # my top page
 
+    send = tk.Button(root, text="Send", bg=b_blue, command=lambda: onclick(1))
+    send.grid(row=2, column=1)
 
-send = tk.Button(root, text="Send", bg=b_blue, command=lambda: onclick(1))
-send.grid(row=2, column=1)
+    root.bind('<Return>', lambda event: onclick(1))
 
-root.bind('<Return>', lambda event: onclick(1))
+    rectangle = tk.Text(root, width=60, height=50, bg=b_blue)  # rectangle
+    rectangle.config(state=tk.DISABLED)
+    rectangle.grid(row=1, column=0, columnspan=2)  # grid
 
-rectangle = tk.Text(root, width=60, height=50, bg=b_blue)  # rectangle
-rectangle.config(state=tk.DISABLED)
-rectangle.grid(row=1, column=0, columnspan=2)  # grid
+    chat_box = tk.Entry(root, bg=b_blue, fg="white", width=55)  # chat box
+    chat_box.grid(row=2, column=0)
 
-
-chat_box = tk.Entry(root, bg=b_blue, fg="white", width=55)  # chat box
-chat_box.grid(row=2, column=0)
-
-
-scrollbar = tk.Scrollbar(rectangle)
-scrollbar.place(relheight=1, relx=0.974)
+    scrollbar = tk.Scrollbar(rectangle)
+    scrollbar.place(relheight=1, relx=0.974)
 
 
 def onclick(args):

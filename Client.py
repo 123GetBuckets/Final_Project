@@ -96,18 +96,18 @@ class client:
 
 def start(self, IP, PORT):
     self.creation()
-     time.sleep(5)
-      addr = (IP, PORT)
-       try:
-            self.user.connect(addr)
-        except:
-            print("Unable to reach HOST")
-            return
-        self.thread = threading.Thread(target=self.Nrec)
-        self.thread2 = threading.Thread(target=self.Nsending)
-        self.thread.start()
-        self.thread2.start()
-        self.creation()
+    time.sleep(5)
+    addr = (IP, PORT)
+    try:
+        self.user.connect(addr)
+    except:
+        print("Unable to reach HOST")
+        return
+    self.thread = threading.Thread(target=self.Nrec)
+    self.thread2 = threading.Thread(target=self.Nsending)
+    self.thread.start()
+    self.thread2.start()
+    self.creation()
 
 
 gui = client()

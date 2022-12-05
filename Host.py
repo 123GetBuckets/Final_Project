@@ -71,5 +71,5 @@ class host:
             thread.start()
 
 
-server = host("sock", '10.109.82.246', 444)
+server = host("sock", '10.109.82.33', 444)
 server.start()

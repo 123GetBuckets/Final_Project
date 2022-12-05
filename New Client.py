@@ -69,7 +69,7 @@ class client:
         self.rectangle = tk.Text(self.root, width=60, height=50, bg=self.b_blue)  # rectangle
         self.chat_box = tk.Entry(self.root, bg=self.b_blue, fg="black", width=55)
         self.scrollbar = tk.Scrollbar(self.rectangle)
-        self.switch = False
+        self.Switch = False
 
     def creation(self):
         self.top_page = tk.Label(self.root, bg=self.b_blue, fg="black",
@@ -89,6 +89,7 @@ class client:
 
     def onclick(self, args):  # send button
         self.msg = self.chat_box.get()
+        print(self.msg)
         while True:
             if self.msg.lower() == "terminate":
                 self.user.close()
@@ -103,15 +104,15 @@ class client:
 
     def Nsending(self):
         while True:
-            try:
-                if self.Switch is True:
-                    if self.onclick(1) != False:
+            if self.Switch is True:
+                if self.onclick(1) != False:
+                    try:
                         self.user.send(bytes(self.msg, encoding='ascii'))
                         self.Switch = False
-            except:
-                print("SEND ERROR")
-                self.user.close()
-                return False
+                    except:
+                        print("SEND ERROR")
+                        self.user.close()
+                        return False
 
     def Nrec(self):
         while True:
@@ -135,15 +136,15 @@ class client:
         except:
             print("Unable to reach HOST")
             return
-        print('connect')
-        self.creation()
+        # print('connect')
         self.thread = threading.Thread(target=self.Nrec)
         self.thread2 = threading.Thread(target=self.Nsending)
+        self.creation()
         self.thread.start()
         self.thread2.start()
 
 
 gui = client()
-gui.start('10.109.82.33', 444)
+gui.start('10.109.82.235', 444)
 
 gui.root.mainloop()

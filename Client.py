@@ -2,6 +2,9 @@ import tkinter as tk
 import socket
 import threading
 import time
+import pygame
+from PIL import ImageTk, Image
+
 
 class client:
     def __init__(self):
@@ -75,16 +78,31 @@ class client:
                 self.user.close()
                 return False
 
-    def start(self, IP, PORT):
-        self.creation()
-        time.sleep(5)
-        addr = (IP, PORT)
-        try:
+    def play(self):
+        pygame.mixer.music.load("song_for_game.mp3")
+        pygame.mixer.music.play(loops=0)
+
+
+'''
+    def logo():
+        # image1 = Image.open("bucket.png")
+        # test = ImageTk.PhotoImage(image1)
+        # label1 = tk.Label(image=test)
+        label1.image = test
+        label1.place(x=50, y=50)
+        root.mainloop()
+'''
+
+
+def start(self, IP, PORT):
+    self.creation()
+     time.sleep(5)
+      addr = (IP, PORT)
+       try:
             self.user.connect(addr)
         except:
             print("Unable to reach HOST")
             return
-        # print('connect')
         self.thread = threading.Thread(target=self.Nrec)
         self.thread2 = threading.Thread(target=self.Nsending)
         self.thread.start()

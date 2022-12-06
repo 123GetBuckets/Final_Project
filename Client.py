@@ -17,8 +17,8 @@ class client:
         self.text_color = "#EAECEE"
         self.font = "Helvetica"
         self.send = tk.Button(self.root, text="Send", bg=self.b_blue, command=lambda: self.sender())
-        self.rectangle = tk.Text(self.root, width=50, height=35, bg=self.b_blue)  # rectangle
-        self.chat_box = tk.Entry(self.root, bg=self.b_blue, fg="black", width=28)
+        self.rectangle = tk.Text(self.root, width=60, height=50, bg=self.b_blue)  # rectangle
+        self.chat_box = tk.Entry(self.root, bg=self.b_blue, fg="black", width=55)
         self.scrollbar = tk.Scrollbar(self.rectangle)
         self.Switch = False
         self.rmsg = ''
@@ -26,16 +26,15 @@ class client:
     def creation(self):
         self.top_page = tk.Label(self.root, bg=self.b_blue, fg="black",
                                  text="Welcome to Chat Bucket!",
-                                 pady=0, padx=1, height=1).place(x=80, y=0)
+                                 pady=1, padx=1, height=1).grid(row=0)
         self.root.title("CHAT BUCKET")
         self.root.eval('tk::PlaceWindow . center')
-        self.root.geometry("300x500")
-        self.root.resizable(width=tk.FALSE, height=tk.FALSE)
-        self.send.place(x=260, y=475)
+        self.root.resizable(width=tk.TRUE, height=tk.TRUE)
+        self.send.grid(row=2, column=1)
         self.root.bind('<Return>', lambda event: self.sender())
         self.rectangle.config(state=tk.DISABLED)
-        self.rectangle.place(x=0, y=10)  # grid
-        self.chat_box.place(x=0, y=470)
+        self.rectangle.grid(row=1, column=0, columnspan=2)  # grid
+        self.chat_box.grid(row=2, column=0)
         self.scrollbar.place(relheight=1, relx=0.974)
 
     def sender(self):
@@ -81,7 +80,6 @@ class client:
                 return False
 
     def play(self):
-        pygame.mixer.init()
         pygame.mixer.music.load("song_for_game.mp3")
         pygame.mixer.music.play(loops=0)
 
@@ -98,7 +96,6 @@ class client:
 
 
     def start(self, IP, PORT):
-        self.play()
         self.creation()
         time.sleep(5)
         addr = (IP, PORT)
@@ -116,4 +113,5 @@ class client:
 
 gui = client()
 gui.start('10.109.97.251', 444)
+
 gui.root.mainloop()

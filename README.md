@@ -4,7 +4,7 @@ Hemanth Kamana - Back end and assisted in the joining of both ends.
 Nana Korsah - Secondary role in front and back ends, primarily facilitating the joining of both ends. 
 Jacob Tamrat - Front End and assisted in the joining of both ends. 
 
-https://user-images.githubusercontent.com/115117729/206808117-f212a34b-89e9-441f-930a-0dab5ece9776.mp4
+https://user-images.githubusercontent.com/115117729/206810849-6373fff0-8b32-42b7-b27c-b6ab1c8a6f28.mp4
 
 BACK END CODE
 -------------

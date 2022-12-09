@@ -1,6 +1,7 @@
 import tkinter as tk
 import pygame
 
+#VERSION WITH MUSIC!!!! *CREATED BUGS*
 
 root = tk.Tk()
 root.title("CHAT BUCKET")
